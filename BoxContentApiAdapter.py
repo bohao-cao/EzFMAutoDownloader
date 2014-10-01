@@ -7,9 +7,10 @@ from base64 import b64encode
 class BoxContentApiAdapter:
 
     def authorize(username, secret):
-        #state = str(b64encode(os.urandom(16)).decode('utf-8'))
-        url = 'https://app.box.com/api/oauth2/authorize?response_type=code&client_id='
-        + username + '&state=' + 'ABCDE'
+        state = str(b64encode(os.urandom(16)))
+        url = 'https://app.box.com/api/oauth2/authorize?response_type=code&client_id='\
+              +str(username) + '&state=' + state
+
         try:
             response = request.urlopen(url)
             print(response)

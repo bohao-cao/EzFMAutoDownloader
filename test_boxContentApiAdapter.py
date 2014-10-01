@@ -8,6 +8,3 @@ class TestBoxContentApiAdapter(TestCase):
     def test_authorize1(self):
         o = BoxContentApiAdapter
         res = o.authorize('glacierwn','Xiaoziyu33')
-
-    def test_authorize(self):
-        self.fail()
