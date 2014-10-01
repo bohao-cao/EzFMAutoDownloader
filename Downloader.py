@@ -17,8 +17,11 @@ persistPath = 'D:\\EzFM\\'
 if not os.path.exists(persistPath):
     os.mkdir(persistPath)
 
+
 todayDateTime = time.strftime("%y%m%d")
-dateTimeToUse = '140926'
+
+
+dateTimeToUse = todayDateTime
 
 url = ezFmBaseUrl + dateTimeToUse + mp3Suffix
 fileN = dateTimeToUse + mp3Suffix
@@ -35,9 +38,9 @@ except Exception as inst:
     print(type(inst))
     exit()
 
-# if not os.path.exists(os.path.join(persistPath + fileN)):
-#     with open(os.path.join(persistPath + fileN), 'wb') as out_file:
-#         shutil.copyfileobj(response, out_file)
+if not os.path.exists(os.path.join(persistPath + fileN)):
+    with open(os.path.join(persistPath + fileN), 'wb') as out_file:
+        shutil.copyfileobj(response, out_file)
 
 
 
