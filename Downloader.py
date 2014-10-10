@@ -34,7 +34,7 @@ files = [f for f in os.listdir(persistPath) if isfile(join(persistPath, f))]
 
 for f in files:
     if time.time() - os.path.getctime(join(persistPath,f)) > 7*60*60*24:
-        logging.info('Remove old file' + persistPath + f)
+        logging.info('Remove old file ' + persistPath + f)
         os.remove(join(persistPath,f))
 
 dateTimeToUse = todayDateTime
@@ -45,18 +45,21 @@ fileN = dateTimeToUse + mp3Suffix
 
 try:
     response = request.urlopen(url)
-    logging.info('Downloading' + fileN + 'starts.')
+    logging.info('Downloading ' + persistPath + fileN + ' starts.')
 except error.HTTPError as err:
-    logging.error('Failed to open mp3 file at date:' + dateTimeToUse + ' .HTTP error code: ' + str(err.code))
+    logging.error('Failed to open mp3 file at date: ' + dateTimeToUse + ' .HTTP error code: ' + str(err.code))
     exit()
 except Exception as inst:
     logging.error(type(inst))
     exit()
 
+
 if not os.path.exists(os.path.join(persistPath + fileN)):
     with open(os.path.join(persistPath + fileN), 'wb') as out_file:
         shutil.copyfileobj(response, out_file)
-
-logging.info('File download successful to ' + persistPath + fileN)
-logging.info('Exit')
+        logging.info('File download successful to ' + persistPath + fileN)
+        logging.info('Exit')
+        exit()
+else:
+    logging.info('File '+ persistPath + fileN + 'already exits.')
 
