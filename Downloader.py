@@ -10,7 +10,13 @@ import logging
 import datetime
 #http://mod.cri.cn/eng/ez/morning/2014/ezm140721.mp3
 
-logging.basicConfig(filename='log.log',format='%(asctime)s %(message)s', datefmt='%m/%d/%y %A')
+logfileName = 'log.log'
+logging.basicConfig(filename=logfileName,format='%(asctime)s %(message)s', datefmt='%m/%d/%y %A',level=logging.INFO)
+logfileSizeInBytes = len(open(logfileName,'rb').read())
+#Bigger than 1MB
+if logfileSizeInBytes/1024 > 1024:
+    open(logfileName,'w').truncate()
+
 
 ezFmBaseUrl = 'http://mod.cri.cn/eng/ez/morning/2014/ezm'
 mp3Suffix = '.mp3'
@@ -61,5 +67,5 @@ if not os.path.exists(os.path.join(persistPath + fileN)):
         logging.info('Exit')
         exit()
 else:
-    logging.info('File '+ persistPath + fileN + 'already exits.')
+    logging.info('File '+ persistPath + fileN + ' already exits.')
 
