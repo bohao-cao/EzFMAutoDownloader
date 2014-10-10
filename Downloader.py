@@ -43,7 +43,10 @@ for f in files:
         logging.info('Remove old file ' + persistPath + f)
         os.remove(join(persistPath,f))
 
-dateTimeToUse = todayDateTime
+if len(sys.argv) > 1:
+    dateTimeToUse =  sys.argv[1]
+else:
+    dateTimeToUse = todayDateTime
 
 url = ezFmBaseUrl + dateTimeToUse + mp3Suffix
 fileN = dateTimeToUse + mp3Suffix
